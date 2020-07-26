@@ -1,26 +1,44 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { Component } from 'react';
 import './App.css';
+import NewTask from './Components/NewTask.js';
+import List from './Components/List.js'
+import Todo from './Components/Todo'
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends Component {
+  
+  constructor() {
+    super();
+
+    this.addTaskToList = this.addTaskToList.bind(this);
+
+    this.state = {
+      list: []
+    }
+  
+    this.addTaskToList = this.addTaskToList.bind(this);
+  }
+
+  addTaskToList(task) {
+    this.setState( { list: [...this.state.list, task] } )
+  }
+
+  render() {
+    
+    return (
+      <div className="App">
+        
+        <h4>To Do List:</h4>
+        <NewTask 
+          addTask = {this.addTaskToList}
+        />
+        <List 
+          tasks = {this.state.list}
+        />
+      </div>
+    );
+  }
+  
+  
 }
 
 export default App;
